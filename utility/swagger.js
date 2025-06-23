@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
      {
-        url: process.env.NODE_ENV=="development"?'https://finance-tracker-api-6c7f.onrender.com'
+        url: process.env.NODE_ENV=="development"?'http://localhost:3000':'https://finance-tracker-api-6c7f.onrender.com'
       }
     ],
     components: {

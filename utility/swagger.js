@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
      {
-        url: process.env.NODE_ENV=="development"?'http://localhost:3000':'https://montorship-api.onrender.com'
+        url: process.env.NODE_ENV=="development"?'http://localhost:3000':'https://finance-tracker-api-v47q.onrender.com'
       }
     ],
     components: {

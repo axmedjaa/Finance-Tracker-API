@@ -69,14 +69,14 @@ const TransactionForm = ({ transaction,open = true, onOpenChange }) => {
     },
     onSuccess: (data) => {
       console.log(data);
+      toast.success('created transaction succesfully')
       queryClient.invalidateQueries(['transaction']);
       onOpenChange?.(false);
-      toast.success('created transaction succesfully')
     },
     onError: (error) => {
       console.error(error);
-      setValidationError(extraErrorMessage(error)||error)
       toast.error(`error creating transaction:${extraErrorMessage(error)}`)
+      setValidationError(extraErrorMessage(error)||error)
     },
   });
   const UpdateTransMutation=useMutation({
@@ -85,8 +85,8 @@ const TransactionForm = ({ transaction,open = true, onOpenChange }) => {
       return response.data
     },
     onSuccess:()=>{
-        queryClient.invalidateQueries(['transaction']);
         toast.success('transaction created succesfully')
+        queryClient.invalidateQueries(['transaction']);
         onOpenChange?.(false);
     },
     onError:(error)=>{

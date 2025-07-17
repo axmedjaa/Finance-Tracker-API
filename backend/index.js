@@ -18,7 +18,18 @@ import { swaggerSpec } from './utility/swagger.js'
 const app=express()
 app.use(logger)
 dotenv.config()
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "blob:"],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+    },
+  })
+);
 app.use(express.json())
 app.use(cors({
      origin:"http://localhost:5173"

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { Navigate, useLocation } from 'react-router'
-import useAuthStore from '../../lib/store/AuthStore'
 import { useQuery } from '@tanstack/react-query'
 import api from '../../lib/api/apiClient'
 import { Loader } from 'lucide-react'
+import useAuthStore from '../../lib/store/authStore'
 
 const AdminProtectedRoute = ({children }) => {
       const{user, setAuth, clearAuth, token}=useAuthStore()

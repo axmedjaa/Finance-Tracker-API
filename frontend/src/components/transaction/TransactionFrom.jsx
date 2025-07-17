@@ -21,6 +21,7 @@ import { Button } from "../ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../../lib/api/apiClient";
 import { extraErrorMessage } from "../../utiliy/errorUtility";
+import { toast } from "sonner";
 const TransactionForm = ({ transaction,open = true, onOpenChange }) => {
   const [transForm, setTransForm] = useState({
     title: "",
@@ -70,10 +71,12 @@ const TransactionForm = ({ transaction,open = true, onOpenChange }) => {
       console.log(data);
       queryClient.invalidateQueries(['transaction']);
       onOpenChange?.(false);
+      toast.success('created transaction succesfully')
     },
     onError: (error) => {
       console.error(error);
       setValidationError(extraErrorMessage(error)||error)
+      toast.error(`error creating transaction:${extraErrorMessage(error)}`)
     },
   });
   const UpdateTransMutation=useMutation({
@@ -83,7 +86,12 @@ const TransactionForm = ({ transaction,open = true, onOpenChange }) => {
     },
     onSuccess:()=>{
         queryClient.invalidateQueries(['transaction']);
+        toast.success('transaction created succesfully')
         onOpenChange?.(false);
+    },
+    onError:(error)=>{
+      toast.error(`error updeting transaction:${extraErrorMessage(error)}`)
+      setValidationError(extraErrorMessage(error)||error)
     }
   })
   const handleSubmit = (e) => {

@@ -15,7 +15,7 @@ import { LoaderCircle } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import api from "../../lib/api/apiClient";
 import { extraErrorMessage } from "../../utiliy/errorUtility";
-import useAuthStore from "../../lib/store/AuthStore";
+import useAuthStore from "../../lib/store/authStore";
 function LoginForm() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState();

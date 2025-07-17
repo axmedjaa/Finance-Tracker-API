@@ -54,7 +54,7 @@ if(process.env.NODE_ENV==="production"){
   app.use(express.static(path.join(_dirname,'../frontend/dist')))
      // Serve the frontend app
      app.get(/.*/,(req,res)=>{
-      res.send(path.join(_dirname,'..','frontend','dist','index.html'))
+      res.sendFile(path.join(_dirname,'..','frontend','dist','index.html'))
      })
 }
 app.use(notFound)

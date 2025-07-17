@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
 import api from '../../lib/api/apiClient'
-import useAuthStore from '../../lib/store/AuthStore'
+
 import { Navigate, useLocation } from 'react-router'
 import { Loader } from 'lucide-react'
+import useAuthStore from '../../lib/store/authStore'
 const ProtectedRoute = ({children}) => {
     const{user, setAuth, clearAuth, token}=useAuthStore()
     const location=useLocation()

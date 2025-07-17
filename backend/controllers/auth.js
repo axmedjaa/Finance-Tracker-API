@@ -20,7 +20,8 @@ export const login=async(req,res,next)=>{
             return res.status(404).json({message:'email or password is wrong'})
         }
         const token=generatorToken(user._id)
-        res.status(201).json(token)
+        user.password = undefined
+        res.status(201).json({token,user})
     } catch (error) {
         next(error)
     }

@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
+import path from 'path'
+import {fileURLToPath} from 'url'
 import authRouter from './routes/auth.js'
 import { notFound } from './middleware/notFound.js'
 import { logger } from './middleware/loger.js'
@@ -19,7 +21,7 @@ dotenv.config()
 app.use(helmet());
 app.use(express.json())
 app.use(cors({
-     origin:""
+     origin:"http://localhost:5173"
 }))
 app.use(limiter)
 if (process.env.NODE_ENV === 'development') {
@@ -31,9 +33,19 @@ mongoose.connect(process.env.NODE_ENV=="development"?process.env.MONGO_URI_DEV:p
         .then(()=>console.log('database is working'))
         .catch(()=>console.log('there is error database'))
 // midleware
-app.use('/auth',authRouter)
-app.use('/uplode',uplodeRouter)
-app.use('/Transactions',TransactionsRouter)
+app.use('/api/auth',authRouter)
+app.use('/api/uplode',uplodeRouter)
+app.use('/api/transactions',TransactionsRouter)
+
+// ser frontent in production
+if(process.env.NODE_ENV==="production"){
+  const _dirname=path.dirname(fileURLToPath(import.meta.url))
+  app.use(express.static(path.join(_dirname,'../frontend/dist')))
+     // Serve the frontend app
+     app.get(/.*/,(req,res)=>{
+      res.send(path.join(_dirname,'..','frontend','dist','index.html'))
+     })
+}
 app.use(notFound)
 app.use(errorHandler)
 app.listen(port,()=>{

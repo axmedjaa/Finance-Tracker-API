@@ -69,7 +69,8 @@ router.post('/login',login)
  *       200:
  *         description: User profile returned
  */
-router.get('/profile',protect,(req,res,next)=>{
+router.get('/profile',protect,async(req,res,next)=>{
+    await new Promise(resolve=>setTimeout(resolve,500))
     res.json(req.user)
 })
 export default router

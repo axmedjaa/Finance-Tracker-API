@@ -19,14 +19,14 @@ export const updateTransactions=async(req,res,next)=>{
     try {
         const transaction=await Transactions.findOneAndUpdate({_id:req.params.id,createdBy:req.user._id},req.body,{new:true})
         if (!transaction) return res.status(404).json({ message: 'transactions not found' });
-        res.status(201).json(transaction)
+        res.status(200).json(transaction)
     } catch (error) {
         next(error)
     }
 }
 export const deleteTransactions=async(req,res,next)=>{
     try {
-        const transaction=await Transactions.findOneAndDelete({_id:req.params.id,createdBy:req.user.id})
+        const transaction=await Transactions.findOneAndDelete({_id:req.params.id,createdBy:req.user._id})
         if(!transaction)  return res.status(404).json({ message: 'transactions not found' });
         res.json({message:"transaction delete"})
     } catch (error) {

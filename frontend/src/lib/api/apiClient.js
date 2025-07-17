@@ -1,6 +1,6 @@
 import axios from 'axios'
 import useAuthStore from '../store/authStore'
-const api_url="https://finance-tracker-api-6c7f.onrender.com/api"
+const api_url="http://localhost:3000/api"
 const api=axios.create({
     baseURL:api_url,
     headers:{

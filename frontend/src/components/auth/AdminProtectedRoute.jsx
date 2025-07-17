@@ -39,7 +39,7 @@ const AdminProtectedRoute = ({children }) => {
         )
     }
     if (isError) {
-        return <Navigate to="/login" state={{ from: location }} replace />
+        return <Navigate to="/signin" state={{ from: location }} replace />
     }
     if (user.role!='admin') {
         return <Navigate to="/dashboard" state={{ from: location }} replace />
